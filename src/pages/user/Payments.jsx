@@ -20,46 +20,70 @@ const demoPayments = [
 
 const Payments = () => {
   return (
-    <div className="max-w-3xl mx-auto bg-white rounded shadow p-6 space-y-6">
-      <h2 className="text-2xl font-semibold text-gray-800">Payments & Billing</h2>
+    <div className="max-w-3xl mx-auto bg-white rounded-lg shadow p-4 sm:p-6 space-y-6">
+      <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">Payments & Billing</h2>
 
       {/* 🧾 Payment History */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-700 mb-2">🧾 Payment History</h3>
+        <h3 className="text-lg font-semibold text-gray-700 mb-4">🧾 Payment History</h3>
         {demoPayments.length > 0 ? (
-          <ul className="space-y-4">
+          <div className="space-y-4">
             {demoPayments.map((payment, index) => (
-              <li
+              <div
                 key={index}
-                className="p-4 border rounded shadow-sm flex justify-between items-center"
+                className="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow"
               >
-                <div>
-                  <p className="font-medium">{payment.policy}</p>
-                  <p className="text-sm text-gray-500">Date: {payment.date}</p>
+                {/* Mobile view */}
+                <div className="block sm:hidden">
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="flex-1">
+                      <p className="font-medium text-gray-900">{payment.policy}</p>
+                      <p className="text-sm text-gray-500">Date: {payment.date}</p>
+                    </div>
+                    <span className="text-green-600 font-bold text-lg">KES. {payment.amount}</span>
+                  </div>
                 </div>
-                <span className="text-green-600 font-bold">KES. {payment.amount}</span>
-              </li>
+                
+                {/* Desktop view */}
+                <div className="hidden sm:flex justify-between items-center">
+                  <div>
+                    <p className="font-medium text-gray-900">{payment.policy}</p>
+                    <p className="text-sm text-gray-500">Date: {payment.date}</p>
+                  </div>
+                  <span className="text-green-600 font-bold text-xl">KES. {payment.amount}</span>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p className="text-gray-500 italic">No payments have been made yet.</p>
         )}
       </div>
 
       {/* 💳 Make a Payment */}
-      <div>
-        <h3 className="text-lg font-semibold text-gray-700 mb-2">💳 Make a Payment</h3>
-        <p className="text-sm text-gray-500">Go to the policy purchase page to make a new payment.</p>
+      <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
+        <h3 className="text-lg font-semibold text-gray-700 mb-3">💳 Make a Payment</h3>
+        <p className="text-sm text-gray-600 mb-4">
+          Go to the policy purchase page to make a new payment.
+        </p>
         <a
           href="/user/add"
-          className="inline-block mt-2 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
+          className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
         >
           Purchase Policy
         </a>
       </div>
 
       {/* 📄 Billing Details */}
+      <div className="bg-blue-50 p-4 sm:p-6 rounded-lg">
+        <h3 className="text-lg font-semibold text-gray-700 mb-3">📄 Billing Information</h3>
+        <div className="space-y-2 text-sm text-gray-600">
+          <p><strong>Billing Address:</strong> 123 Insurance Street, Nairobi, Kenya</p>
+          <p><strong>Tax ID:</strong> KE-123456789</p>
+          <p><strong>Payment Terms:</strong> Net 30 days</p>
+        </div>
       </div>
+    </div>
   );
 };
 

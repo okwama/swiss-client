@@ -6,7 +6,6 @@ const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState(""); // For signup only
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -17,24 +16,25 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="w-full max-w-md space-y-6 bg-white rounded-lg shadow-lg p-6 sm:p-8">
         {/* Logo and Client Portal Header */}
-        <div className="flex flex-col items-center space-y-2">
+        <div className="flex flex-col items-center space-y-3">
           <img 
             src="/lg.svg" 
             alt="Company Logo" 
-            className="h-12 object-contain"
+            className="h-10 sm:h-12 object-contain"
           />
-          <h1 className="text-2xl font-bold text-gray-800">Client Portal</h1>
-          <h2 className="text-lg font-medium text-gray-600">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Client Portal</h1>
+          <h2 className="text-base sm:text-lg font-medium text-gray-600 text-center">
             {isSignup ? "Create an Account" : "Sign in to your account"}
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        
+        <form className="mt-6 space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
           {isSignup && (
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                 Full Name
               </label>
               <input
@@ -44,12 +44,14 @@ const AuthPage = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                placeholder="Enter your full name"
               />
             </div>
           )}
+          
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
               Email Address
             </label>
             <input
@@ -59,11 +61,13 @@ const AuthPage = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              placeholder="Enter your email"
             />
           </div>
+          
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
               Password
             </label>
             <input
@@ -73,28 +77,35 @@ const AuthPage = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              placeholder="Enter your password"
             />
           </div>
-          {error && <div className="text-sm text-red-500">{error}</div>}
+          
+          {/* error && (
+            <div className="text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">
+              {error}
+            </div>
+          ) */}
 
           <div>
             <button
               type="submit"
-              className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="w-full py-2 px-4 border border-transparent rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 font-medium"
             >
               {isSignup ? "Sign Up" : "Login"}
             </button>
           </div>
         </form>
-        <div className="text-center">
+        
+        <div className="text-center space-y-4">
           <p className="text-sm text-gray-600">
             {isSignup ? (
               <>
                 Already have an account?{" "}
                 <button
                   onClick={() => setIsSignup(false)}
-                  className="font-medium text-indigo-600 hover:text-indigo-700"
+                  className="font-medium text-blue-600 hover:text-blue-700 transition-colors duration-200"
                 >
                   Login
                 </button>
@@ -104,17 +115,18 @@ const AuthPage = () => {
                 Don't have an account?{" "}
                 <button
                   onClick={() => setIsSignup(true)}
-                  className="font-medium text-indigo-600 hover:text-indigo-700"
+                  className="font-medium text-blue-600 hover:text-blue-700 transition-colors duration-200"
                 >
                   Sign Up
                 </button>
               </>
             )}
           </p>
-          <div className="mt-4 text-center">
+          
+          <div className="pt-4 border-t border-gray-200">
             <a 
               href="https://swiss-admin.vercel.app//" 
-              className="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
+              className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors duration-200"
               target="_blank"
               rel="noopener noreferrer"
             >

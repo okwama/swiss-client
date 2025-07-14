@@ -103,28 +103,33 @@ const Policies = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white rounded-lg shadow p-6 space-y-4">
-      <h2 className="text-xl font-semibold text-gray-800">Buy a Policy</h2>
+    <div className="max-w-xl mx-auto bg-white rounded-lg shadow p-4 sm:p-6 space-y-4">
+      <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Buy a Policy</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <select
-          className="w-full border border-gray-300 rounded px-3 py-2"
-          onChange={handlePolicyChange}
-          value={selectedPolicy?.title || ""}
-          required
-        >
-          <option value="" disabled>
-            -- Select a Policy --
-          </option>
-          {policyData.map((policy, index) => (
-            <option key={index} value={policy.title}>
-              {policy.title}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Select Policy
+          </label>
+          <select
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            onChange={handlePolicyChange}
+            value={selectedPolicy?.title || ""}
+            required
+          >
+            <option value="" disabled>
+              -- Select a Policy --
             </option>
-          ))}
-        </select>
+            {policyData.map((policy, index) => (
+              <option key={index} value={policy.title}>
+                {policy.title}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {selectedPolicy && (
-          <div className="bg-gray-50 p-4 rounded border text-sm text-gray-600 space-y-2">
+          <div className="bg-gray-50 p-4 rounded-lg border text-sm text-gray-600 space-y-2">
             <p>{selectedPolicy.description}</p>
             <p className="font-semibold text-yellow-600">
               Amount: KES.{selectedPolicy.amount}
@@ -132,29 +137,39 @@ const Policies = () => {
           </div>
         )}
 
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          placeholder="Your Name"
-          className="w-full border border-gray-300 px-3 py-2 rounded"
-          required
-        />
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Your Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Your Name"
+            className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            required
+          />
+        </div>
 
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          placeholder="Your Email"
-          className="w-full border border-gray-300 px-3 py-2 rounded"
-          required
-        />
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Your Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="Your Email"
+            className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            required
+          />
+        </div>
 
         <button
           type="submit"
-          className="w-full bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
+          className="w-full bg-yellow-500 text-white py-3 px-4 rounded-lg hover:bg-yellow-600 transition-colors duration-200 font-medium"
         >
           Purchase Policy
         </button>
@@ -162,59 +177,82 @@ const Policies = () => {
 
       {/* Modal Dialog */}
       {showCardModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md space-y-4 shadow-lg relative">
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 p-4">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md space-y-4 shadow-lg relative">
             <button
-              className="absolute top-2 right-3 text-gray-400 hover:text-gray-700"
+              className="absolute top-2 right-3 text-gray-400 hover:text-gray-700 p-2"
               onClick={() => setShowCardModal(false)}
             >
               ✕
             </button>
-            <h3 className="text-lg font-semibold text-gray-800">
+            <h3 className="text-lg font-semibold text-gray-800 pr-8">
               Enter Card Details
             </h3>
             <form onSubmit={handleCardSubmit} className="space-y-4">
-              <input
-                type="text"
-                name="cardName"
-                placeholder="Cardholder Name"
-                value={cardData.cardName}
-                onChange={handleCardInputChange}
-                className="w-full border border-gray-300 px-3 py-2 rounded"
-                required
-              />
-              <input
-                type="text"
-                name="cardNumber"
-                placeholder="Card Number"
-                value={cardData.cardNumber}
-                onChange={handleCardInputChange}
-                className="w-full border border-gray-300 px-3 py-2 rounded"
-                required
-              />
-              <div className="flex gap-3">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Cardholder Name
+                </label>
                 <input
                   type="text"
-                  name="expiry"
-                  placeholder="MM/YY"
-                  value={cardData.expiry}
+                  name="cardName"
+                  placeholder="Cardholder Name"
+                  value={cardData.cardName}
                   onChange={handleCardInputChange}
-                  className="w-1/2 border border-gray-300 px-3 py-2 rounded"
-                  required
-                />
-                <input
-                  type="text"
-                  name="cvv"
-                  placeholder="CVV"
-                  value={cardData.cvv}
-                  onChange={handleCardInputChange}
-                  className="w-1/2 border border-gray-300 px-3 py-2 rounded"
+                  className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   required
                 />
               </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Card Number
+                </label>
+                <input
+                  type="text"
+                  name="cardNumber"
+                  placeholder="Card Number"
+                  value={cardData.cardNumber}
+                  onChange={handleCardInputChange}
+                  className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Expiry
+                  </label>
+                  <input
+                    type="text"
+                    name="expiry"
+                    placeholder="MM/YY"
+                    value={cardData.expiry}
+                    onChange={handleCardInputChange}
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    CVV
+                  </label>
+                  <input
+                    type="text"
+                    name="cvv"
+                    placeholder="CVV"
+                    value={cardData.cvv}
+                    onChange={handleCardInputChange}
+                    className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                </div>
+              </div>
+              
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
               >
                 Confirm Payment
               </button>

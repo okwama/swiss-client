@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-const Sidebar = () => {
+const Sidebar = ({ onClose }) => {
   const [expandedMenus, setExpandedMenus] = useState({
     navigation: true,
     policies: false,
@@ -16,34 +16,56 @@ const Sidebar = () => {
     }));
   };
 
+  const handleNavClick = () => {
+    // Close sidebar on mobile when nav item is clicked
+    if (window.innerWidth < 1024) {
+      onClose?.();
+    }
+  };
+
   return (
-    <div className="fixed h-full bg-white shadow-lg w-64 p-4 overflow-y-auto">
-      <div className="flex items-center mb-8 p-2">
-        <img 
-          src="/lg.svg" 
-          alt="Logo" 
-          className="h-10 w-100 mr-3"
-        />
-        {/* <h2 className="text-xl font-bold text-gray-800">User Portal</h2> */}
+    <div className="h-full bg-white shadow-lg w-64 flex flex-col">
+      {/* Header with close button for mobile */}
+      <div className="flex items-center justify-between p-4 border-b border-gray-200">
+        <div className="flex items-center">
+          <img 
+            src="/lg.svg" 
+            alt="Logo" 
+            className="h-8 w-auto mr-3"
+          />
+          <h2 className="text-lg font-bold text-gray-800 hidden sm:block">User Portal</h2>
+        </div>
+        <button
+          onClick={onClose}
+          className="lg:hidden p-2 rounded-md hover:bg-gray-100"
+        >
+          <XMarkIcon className="h-6 w-6 text-gray-600" />
+        </button>
       </div>
       
-      <nav className="space-y-1">
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto p-4 space-y-1">
         {/* Dashboard */}
         <NavLink 
           to="/user/dashboard" 
+          onClick={handleNavClick}
           className={({ isActive }) => 
-            `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+            `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+              isActive 
+                ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                : 'text-gray-600 hover:bg-gray-100'
+            }`
           }
         >
-          Dashboard
+          <span className="text-sm font-medium">Dashboard</span>
         </NavLink>
 
         {/* Navigation */}
         <div 
-          className="flex items-center justify-between p-3 rounded-lg text-gray-600 hover:bg-gray-100 cursor-pointer"
+          className="flex items-center justify-between p-3 rounded-lg text-gray-600 hover:bg-gray-100 cursor-pointer transition-colors duration-200"
           onClick={() => toggleMenu('navigation')}
         >
-          <span className="font-medium">Navigation</span>
+          <span className="font-medium text-sm">Navigation</span>
           {expandedMenus.navigation ? (
             <ChevronDownIcon className="h-4 w-4" />
           ) : (
@@ -55,50 +77,68 @@ const Sidebar = () => {
           <div className="ml-4 space-y-1">
             <NavLink 
               to="/user/policies" 
+              onClick={handleNavClick}
               className={({ isActive }) => 
-                `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+                `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+                  isActive 
+                    ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`
               }
             >
-              Policies
+              <span className="text-sm">Policies</span>
             </NavLink>
             
             <NavLink 
               to="/user/claims" 
+              onClick={handleNavClick}
               className={({ isActive }) => 
-                `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+                `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+                  isActive 
+                    ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`
               }
             >
-              Claims
+              <span className="text-sm">Claims</span>
             </NavLink>
             
             <NavLink 
               to="/user/payments" 
+              onClick={handleNavClick}
               className={({ isActive }) => 
-                `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+                `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+                  isActive 
+                    ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`
               }
             >
-              Payments & Billing
+              <span className="text-sm">Payments & Billing</span>
             </NavLink>
             
             <NavLink 
               to="/user/profile" 
+              onClick={handleNavClick}
               className={({ isActive }) => 
-                `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+                `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+                  isActive 
+                    ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`
               }
             >
-              Profile
+              <span className="text-sm">Profile</span>
             </NavLink>
-            
-            
           </div>
         )}
 
         {/* Policies Management */}
         <div 
-          className="flex items-center justify-between p-3 rounded-lg text-gray-600 hover:bg-gray-100 cursor-pointer"
+          className="flex items-center justify-between p-3 rounded-lg text-gray-600 hover:bg-gray-100 cursor-pointer transition-colors duration-200"
           onClick={() => toggleMenu('policies')}
         >
-          <span className="font-medium">Policies Management</span>
+          <span className="font-medium text-sm">Policies Management</span>
           {expandedMenus.policies ? (
             <ChevronDownIcon className="h-4 w-4" />
           ) : (
@@ -110,30 +150,40 @@ const Sidebar = () => {
           <div className="ml-4 space-y-1">
             <NavLink 
               to="/user/policies" 
+              onClick={handleNavClick}
               className={({ isActive }) => 
-                `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+                `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+                  isActive 
+                    ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`
               }
             >
-              View All Policies
+              <span className="text-sm">View All Policies</span>
             </NavLink>
             
             <NavLink 
               to="add" 
+              onClick={handleNavClick}
               className={({ isActive }) => 
-                `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+                `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+                  isActive 
+                    ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`
               }
             >
-              Buy New Policy
+              <span className="text-sm">Buy New Policy</span>
             </NavLink>
           </div>
         )}
 
         {/* Claim Management */}
         <div 
-          className="flex items-center justify-between p-3 rounded-lg text-gray-600 hover:bg-gray-100 cursor-pointer"
+          className="flex items-center justify-between p-3 rounded-lg text-gray-600 hover:bg-gray-100 cursor-pointer transition-colors duration-200"
           onClick={() => toggleMenu('claims')}
         >
-          <span className="font-medium">Claim Management</span>
+          <span className="font-medium text-sm">Claim Management</span>
           {expandedMenus.claims ? (
             <ChevronDownIcon className="h-4 w-4" />
           ) : (
@@ -145,20 +195,30 @@ const Sidebar = () => {
           <div className="ml-4 space-y-1">
             <NavLink 
               to="/user/claims" 
+              onClick={handleNavClick}
               className={({ isActive }) => 
-                `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+                `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+                  isActive 
+                    ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`
               }
             >
-              File a Claim
+              <span className="text-sm">File a Claim</span>
             </NavLink>
             
             <NavLink 
               to="/user/claim/status" 
+              onClick={handleNavClick}
               className={({ isActive }) => 
-                `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+                `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+                  isActive 
+                    ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`
               }
             >
-              Claim Status
+              <span className="text-sm">Claim Status</span>
             </NavLink>
           </div>
         )}
@@ -166,20 +226,31 @@ const Sidebar = () => {
         {/* Notifications */}
         <NavLink 
           to="/user/notifications" 
+          onClick={handleNavClick}
           className={({ isActive }) => 
-            `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
+            `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+              isActive 
+                ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                : 'text-gray-600 hover:bg-gray-100'
+            }`
           }
         >
-          Notifications Center
+          <span className="text-sm font-medium">Notifications Center</span>
         </NavLink>
+        
         <NavLink 
-              to="/contact" 
-              className={({ isActive }) => 
-                `flex items-center p-3 rounded-lg ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`
-              }
-            >
-              Support Center
-            </NavLink>
+          to="/contact" 
+          onClick={handleNavClick}
+          className={({ isActive }) => 
+            `flex items-center p-3 rounded-lg transition-colors duration-200 ${
+              isActive 
+                ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-500' 
+                : 'text-gray-600 hover:bg-gray-100'
+            }`
+          }
+        >
+          <span className="text-sm font-medium">Support Center</span>
+        </NavLink>
       </nav>
     </div>
   );

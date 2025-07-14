@@ -102,66 +102,94 @@ const Claim = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white rounded-lg shadow p-6 space-y-4">
-      <h2 className="text-xl font-semibold text-gray-800">File an Insurance Claim</h2>
+    <div className="max-w-xl mx-auto bg-white rounded-lg shadow p-4 sm:p-6 space-y-4">
+      <h2 className="text-lg sm:text-xl font-semibold text-gray-800">File an Insurance Claim</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <select
-          className="w-full border border-gray-300 rounded px-3 py-2"
-          onChange={handlePolicyChange}
-          value={selectedPolicy?.title || ""}
-          required
-        >
-          <option value="" disabled>-- Select Your Policy --</option>
-          {purchasedPolicies.map((policy, index) => (
-            <option key={index} value={policy.title}>
-              {policy.title}
-            </option>
-          ))}
-        </select>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Select Your Policy
+          </label>
+          <select
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            onChange={handlePolicyChange}
+            value={selectedPolicy?.title || ""}
+            required
+          >
+            <option value="" disabled>-- Select Your Policy --</option>
+            {purchasedPolicies.map((policy, index) => (
+              <option key={index} value={policy.title}>
+                {policy.title}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {selectedPolicy && (
-          <div className="bg-gray-50 p-3 rounded text-sm text-gray-600">
+          <div className="bg-gray-50 p-3 rounded-lg text-sm text-gray-600">
             <p><span className="font-semibold">Policy Number:</span> {selectedPolicy.policyNumber}</p>
           </div>
         )}
 
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          readOnly
-          className="w-full border border-gray-300 px-3 py-2 rounded bg-gray-100"
-        />
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Your Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            readOnly
+            className="w-full border border-gray-300 px-3 py-2 rounded-lg bg-gray-100 focus:outline-none"
+          />
+        </div>
 
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          readOnly
-          className="w-full border border-gray-300 px-3 py-2 rounded bg-gray-100"
-        />
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Your Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            readOnly
+            className="w-full border border-gray-300 px-3 py-2 rounded-lg bg-gray-100 focus:outline-none"
+          />
+        </div>
 
-        <textarea
-          name="claimDescription"
-          placeholder="Describe your claim..."
-          value={formData.claimDescription}
-          onChange={handleInputChange}
-          className="w-full border border-gray-300 px-3 py-2 rounded"
-          rows={4}
-          required
-        />
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Claim Description
+          </label>
+          <textarea
+            name="claimDescription"
+            placeholder="Describe your claim..."
+            value={formData.claimDescription}
+            onChange={handleInputChange}
+            className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
+            rows={4}
+            required
+          />
+        </div>
 
-        <input
-          type="file"
-          onChange={handleFileChange}
-          className="w-full border border-gray-300 px-3 py-2 rounded"
-          accept="image/*,application/pdf"
-        />
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Attach Documents (Optional)
+          </label>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            accept="image/*,application/pdf"
+          />
+          <p className="text-xs text-gray-500 mt-1">
+            Accepted formats: Images (JPG, PNG) and PDF documents
+          </p>
+        </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+          className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
         >
           Submit Claim
         </button>

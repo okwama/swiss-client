@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaShieldAlt, FaChartLine, FaHandshake, FaMedal, FaUserShield, FaGlobeEurope, FaArrowRight } from 'react-icons/fa';
+import { FaShieldAlt, FaChartLine, FaHandshake, FaMedal, FaUserShield, FaGlobeEurope } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const About = () => {
