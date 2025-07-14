@@ -2,6 +2,8 @@ import React from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
+import ChatBot from '../components/ChatBot';
+
 const Contact = () => {
   return (
     <div className="bg-gradient-to-b from-gray-50 to-gray-100">
@@ -77,7 +79,7 @@ const Contact = () => {
                 <FaPhoneAlt className="text-red-500 text-xl" />
               </div>
               <h4 className="text-xl font-bold text-gray-800 mb-3 text-center">Phone Support</h4>
-              <p className="text-gray-600 text-center">254 712345678</p>
+              <p className="text-gray-600 text-center">254 7000000</p>
               <p className="text-gray-500 text-sm text-center mt-2">Mon-Fri, 8:00-18:00</p>
             </motion.div>
             
@@ -103,8 +105,9 @@ const Contact = () => {
                 <FaMapMarkerAlt className="text-red-500 text-xl" />
               </div>
               <h4 className="text-xl font-bold text-gray-800 mb-3 text-center">Headquarters</h4>
-              <p className="text-gray-600 text-center">Kilimani</p>
-              <p className="text-gray-600 text-center">Nairobi, Kenya</p>
+              <p className="text-gray-600 text-center">Foros do Carrapatal</p>
+              <p className="text-gray-600 text-center">2985-051 Canha</p>
+              <p className="text-gray-600 text-center">Canha,Monjito, sebutal, portugal</p>
             </motion.div>
           </div>
         </div>
@@ -203,6 +206,9 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      {/* ChatBot */}
+      <ChatBot />
     </div>
   );
 };
